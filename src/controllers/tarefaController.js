@@ -25,6 +25,20 @@ async function createTarefa(data) {
     }
 };
 
+async function editTarefa(data) {
+    try {
+        await DB.execute(
+            `UPDATE tarefa SET tarefa_nome = '${data.tarefa_nome}' WHERE tarefa_id = ${data.tarefa_id};`
+        );
+
+    } catch (err) {
+        return {
+            type: 'error',
+            message: err.message
+        };
+    }
+}
+
 async function deleteTarefa(id) {
     try {
         await DB.execute(
@@ -46,6 +60,7 @@ async function deleteTarefa(id) {
 
 module.exports = {
     createTarefa,
+    editTarefa,
     deleteTarefa,
     listAll
 };
